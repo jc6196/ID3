@@ -1,0 +1,5 @@
+{{ember-cli-holderjs src_url="holder.js/100px300" class="img-responsive"}}
+<h1>{{model.title}}</h1>
+<h4><small>{{moment-from-now model.timestamp}}</small></h4>
+<p>{{model.body}}</p>
+{{#link-to 'posts.edit' model class="btn btn-default"}}Edit Post{{/link-to}}

@@ -3,9 +3,11 @@
 {{#each model as |post|}}
   <div class="col-lg-3 col-sm-6 col-xs-12">
     <div class="thumbnail">
-      {{ember-cli-holderjs src_url="holder.js/100px200" class="img-responsive"}}
+      {{#link-to "posts.show" post}}
+        {{ember-cli-holderjs src_url="holder.js/100px200" class="img-responsive"}}
+      {{/link-to}}
       <div class="caption">
-        <h4>{{post.title}} <small>{{moment-from-now post.timestamp}}</small></h4>
+        <h4>{{#link-to "posts.show" post}}{{post.title}}{{/link-to}} <small>{{moment-from-now post.timestamp}}</small></h4>
         <p>{{post.body}}</p>
       </div>
     </div>
