@@ -1,0 +1,7 @@
+<h1>New Post</h1>
+<form>
+  <p>{{input value=model.title placeholder="Title" class="form-control"}}</p>
+  <p>{{textarea value=model.body placeholder="Body" rows="10" class="form-control"}}</p>
+  <button {{action "save" model}} class="btn btn-primary">Save Post</button>
+  <button {{action "cancel" model}} class="btn btn-link">Cancel</button>
+</form>
