@@ -20,6 +20,7 @@ Router.map(function() {
       path: ':post_id/edit'
     });
   });
+  this.route('profile');
 });
 
 export default Router;
