@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
+/*
 let books = [{
   id: 'moby-dick',
   title: 'Moby Dick',
@@ -21,7 +22,7 @@ let books = [{
   author: 'Walt Whitman',
   published: '1855',
 }];
-
+*/
 export default Ember.Route.extend({
   model() {
     //return books;

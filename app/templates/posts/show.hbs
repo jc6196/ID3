@@ -5,3 +5,22 @@
 {{#if session.isAuthenticated}}
   {{#link-to 'posts.edit' model class="btn btn-default"}}Edit Post{{/link-to}}
 {{/if}}
+{{#if model.comments}}
+  <hr/>
+  <h2>Comments</h2>
+  {{#each model.comments as |comment|}}
+    <h4><small>{{moment-from-now comment.timestamp}}</small></h4>
+    <p>{{comment.body}}</p>
+  {{/each}}
+{{/if}}
+<hr/>
+<h2>Leave a comment!</h2>
+{{#if session.isAuthenticated}}
+  <form>
+    <p>{{textarea value=commentBody placeholder="Add your comment" rows="10" class="form-control"}}</p>
+    <button {{action "saveComment" model}} class="btn btn-primary">Save Comment</button>
+    <button {{action "cancelComment"}} class="btn btn-link">Cancel</button>
+  </form>
+{{else}}
+  <p>Please login to leave a comment!</p>
+{{/if}}
