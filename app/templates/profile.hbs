@@ -1,9 +1,0 @@
-{{#if session.isAuthenticated}}
-  <div class="center-block">
-    <img src="{{session.currentUser.photoURL}}" height="128" width="128" class="img-circle center-block" />
-    <h2 class="text-center">{{session.currentUser.displayName}}</h2>
-    <h4 class="text-center"><small>via {{session.provider}}</small></h4>
-  </div>
-{{else}}
-  {{not-authorized}}
-{{/if}}

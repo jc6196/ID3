@@ -1,0 +1,22 @@
+{{x-file-input 
+  name="files" 
+  multiple=false 
+  accept="image/*"
+  action="didSelectFiles" 
+  alt="Choose an image" 
+  class="btn btn-success"
+}}
+
+{{#if model.imageURL}}
+  <p><img src="{{model.imageURL}}" alt="" class="img-responsive img-thumbnail" width="400"></p>
+{{else}}
+    {{#if progress}}
+        <p>
+            <div class="progress ">
+                <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: {{progress}}%;">
+                    {{progress}} %
+                </div>
+            </div>
+        </p>
+    {{/if}}
+{{/if}}

@@ -1,20 +1,50 @@
-{{ember-cli-holderjs src_url="holder.js/100px300" class="img-responsive"}}
+{{#if model.imageURL}}
+  <img src="{{model.imageURL}}" class="img-responsive" />
+{{else}}
+  {{ember-cli-holderjs src_url="holder.js/100px300" class="img-responsive"}}
+{{/if}}
 <h1>{{model.title}}</h1>
 <h4><small>{{moment-from-now model.timestamp}}</small></h4>
-<p>{{model.body}}</p>
-{{#if session.isAuthenticated}}
-  {{#link-to 'posts.edit' model class="btn btn-default"}}Edit Post{{/link-to}}
-{{/if}}
+<p class="lead">{{model.body}}</p>
+  <div class="media">
+    <div class="media-left">
+      {{#with model.author as |author|}}
+        {{#link-to 'profile.show' author}}
+          <img src="{{author.photoURL}}" class="img-circle media-object" height="64" width="64" />
+        {{/link-to}}
+      {{/with}}
+    </div>
+    <div class="media-body">
+      {{#with model.author as |author|}}
+        <h4>{{#link-to 'profile.show' author}}{{author.displayName}}{{/link-to}}</h4>
+      {{/with}}
+      {{moment-from-now model.timestamp}}
+      {{#if session.isAuthenticated}}
+        &nbsp;{{#link-to 'posts.edit' model class="btn btn-default btn-xs"}}Edit Post{{/link-to}}
+      {{/if}}
+    </div>
+ </div>
 {{#if model.comments}}
   <hr/>
-  <h2>Comments</h2>
+  <h3>{{model.comments.length}} Comments</h3>
   {{#each model.comments as |comment|}}
-    <h4><small>{{moment-from-now comment.timestamp}}</small></h4>
-    <p>{{comment.body}}</p>
+    <div class="media">
+      {{#with comment.author as |author|}}
+        <div class="media-left">
+          {{#link-to 'profile.show' author}}
+            <img src="{{author.photoURL}}" class="img-circle media-object" height="32" width="32" />
+          {{/link-to}}
+        </div>
+      {{/with}}
+         <div class="media-body">
+          <h4 class="media-heading"><small>{{moment-from-now comment.timestamp}}</small></h4>
+          {{comment.body}}
+        </div>
+      </div>
   {{/each}}
 {{/if}}
 <hr/>
-<h2>Leave a comment!</h2>
+<h3>Leave a comment!</h3>
 {{#if session.isAuthenticated}}
   <form>
     <p>{{textarea value=commentBody placeholder="Add your comment" rows="10" class="form-control"}}</p>

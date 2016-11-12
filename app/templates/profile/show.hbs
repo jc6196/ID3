@@ -1,0 +1,29 @@
+ {{#if session.isAuthenticated}}
+   <div class="center-block">
+     <img src="{{model.photoURL}}" height="128" width="128" class="img-circle center-block" />
+     <h2 class="text-center">{{model.displayName}}</h2>
+   </div>
+   {{#if model.posts}}
+     <hr/>
+     <h2>Posts</h2>
+     {{#each model.posts as |post|}}
+       <h3>{{#link-to "posts.show" post}}{{post.title}}{{/link-to}}</h3>
+       <h4><small>{{moment-from-now post.timestamp}}</small></h4>
+       {{#if post.comments}}
+         <p>{{#link-to "posts.show" post}}{{post.comments.length}} comments{{/link-to}}</p>
+       {{/if}}
+     {{/each}}
+   {{/if}}
+   {{#if model.comments}}
+     <hr/>
+     <h2>Comments</h2>
+     {{#each model.comments as |comment|}}
+       <h4><small>
+         {{moment-from-now comment.timestamp}} on {{#with comment.post as |post|}}{{#link-to "posts.show" post}}{{post.title}}{{/link-to}}{{/with}}
+       </small></h4>
+       <p>{{comment.body}}</p>
+     {{/each}}
+   {{/if}}
+ {{else}}
+   {{not-authorized}}
+ {{/if}}
